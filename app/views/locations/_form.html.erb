@@ -1,0 +1,42 @@
+<%= form_for(location) do |f| %>
+  <% if location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+      <% location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :street_address %>
+    <%= f.text_field :street_address, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :city %>
+    <%= f.collection_select :city,
+                            Location::MARTA_CITIES,
+                            :to_s,
+                            :to_s,
+                            {},
+                            {class: 'form-control'} %>
+  </div>
+
+  <div class="field form-group text-center">
+    <%= f.label "How close is \"close\"?" %><br>
+    <%= f.radio_button :distance, '1/4 Mile'%>
+    <%= label :distance_quarter_mile, '1/4 Mile' %>
+    <%= f.radio_button :distance, '1/2 Mile', checked: true %>
+    <%= label :distance_half_mile, '1/2 Mile' %>
+    <%= f.radio_button :distance, '1 Mile' %>
+    <%= label :distance_one_mile, '1 Mile' %>
+  </div>
+
+  <div class="actions form-group text-center">
+    <%= f.submit 'Find Buses', class: 'btn btn-sm btn-success' %>
+  </div>
+<% end %>

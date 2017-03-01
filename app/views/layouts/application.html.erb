@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TimeToGo</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- Show any notices, with bootstrap fanciness -->
+    <% if notice.present? %>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <div class="alert alert-info text-center">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <%= notice %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
