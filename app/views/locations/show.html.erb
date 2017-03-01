@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center">Your Escape Bus!</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="text-muted">Your current location</h3>
+      <p class="text-muted">
+        <%= @location.full_street_address %>
+        <small><%= link_to fa_icon('pencil', text: 'Edit'), edit_location_path(@location) %></small>
+      </p>
+    </div>
+
+    <div class="col-md-6">
+      <h3>The buses within <%= @location.distance.downcase %> are...</h3>
+
+      <% @buses.each do |bus| %>
+        <div class="well">
+          <strong>Route: </strong><%= bus["ROUTE"] %> <%= bus["DIRECTION"] %><br>
+          <strong>Bus Number: </strong><%= bus["VEHICLE"] %><br>
+          <strong>Next Stop: </strong><%= bus["TIMEPOINT"] %><br>
+        </div>
+      <% end %>
+
+      <% if @buses.empty? %>
+        <p>
+          Not really that close. Time to walk, bike, taxi, Uber, or <%= link_to 'edit your location', edit_location_path(@location) %>.
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <hr>
+      <%= link_to 'Change Your Location', edit_location_path(@location), class: 'btn btn-sm btn-default' %>
+      <p><br></p>
+    </div>
+  </div>
+  </div>
+</div>
